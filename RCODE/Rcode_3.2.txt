@@ -1,0 +1,9 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/otitis.csv"
+otitis = read.csv(www, header = TRUE)
+attach(otitis)
+table(otitis)
+barplot(table(otitis))
+
+(events = 0:6)
+(probabilities = as.numeric(table(otitis))/1000)
+(EV = sum(events * probabilities))
