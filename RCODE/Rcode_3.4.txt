@@ -1,0 +1,9 @@
+x = seq(from = 20, to = 60, by = 1)
+y = dbinom(x, size = 210 , prob = 39/210 )
+barplot(y)
+
+sum(dbinom(x = 30:50, size = 210 , prob = 39/210 ))
+
+(b = pbinom(q = 50, size = 210 , prob = 39/210 ))
+(a = pbinom(q = 29, size = 210 , prob = 39/210 ))
+b-a

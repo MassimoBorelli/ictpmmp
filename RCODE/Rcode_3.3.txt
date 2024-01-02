@@ -1,0 +1,9 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/roma.csv"
+roma = read.csv(www, header = TRUE)
+attach(roma)
+mean(AgePatient)
+sd(AgePatient)
+par(mfrow = c(1,2))
+hist(AgePatient)
+qqnorm(AgePatient)
+qqline(AgePatient)
