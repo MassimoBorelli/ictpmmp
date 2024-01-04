@@ -1,0 +1,11 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/fresher.csv"
+fresher = read.csv(www, header = TRUE)
+attach(fresher)
+
+shapiro.test(systolic[gender == "f"])
+shapiro.test(systolic[gender == "m"])
+
+library(car)
+leveneTest(systolic ~ gender)
+
+t.test(systolic ~ gender)

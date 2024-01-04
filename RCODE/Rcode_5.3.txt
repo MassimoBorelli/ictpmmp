@@ -1,0 +1,8 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/roma.csv"
+roma = read.csv(www, header = TRUE)
+attach(roma)
+
+shapiro.test(logHE4[Histology == "benign"])
+shapiro.test(logHE4[Histology == "malignant"])
+
+wilcox.test(logHE4 ~ Histology)
