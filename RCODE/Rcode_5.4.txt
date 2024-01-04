@@ -1,0 +1,20 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/tooth.csv"
+tooth = read.csv(www, header = TRUE)
+attach(tooth)
+
+rm(fresher)
+tail(tooth)
+
+shapiro.test(areainfl[il1b == "etero"])
+shapiro.test(areainfl[il1b == "mut"])
+shapiro.test(areainfl[il1b == "wt"])
+
+fligner.test(areainfl ~ il1b)
+
+model = aov(areainfl ~ il1b)
+summary.lm(model)
+
+library(multcomp)
+library(sandwich)
+posthoc = glht(model, linfct = mcp(il1b = "Tukey"), vcov = sandwich)
+summary(posthoc)
