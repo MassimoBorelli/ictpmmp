@@ -1,0 +1,22 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/gossett.csv"
+gossett = read.csv(www, header = TRUE)
+attach(gossett)
+
+distribution = numeric(5000)
+
+for (i in 1:5000) {
+  bootstrapped = sample(difference, size = 11, replace = TRUE)
+  distribution[i] = t.test(bootstrapped, mu = 0)$p.value
+}
+
+plot(density(distribution), 
+     main = "plausible distribution of Gossett p-values")
+T = t.test(difference, mu = 0)$p.value
+points(T, 0, col = "orange")
+lines(c(T, T), c(0, 2), lty = 3, col = "orange")
+lines(c(0.05, 0.05), c(0, 4), lty = 2, col = "purple")
+
+sum(distribution < 0.05)/5000
+
+power.t.test(n = length(difference), delta = mean(difference), 
+             sd = sd(difference), sig.level = 0.05, type = "one.sample")

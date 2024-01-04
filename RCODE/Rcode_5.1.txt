@@ -1,0 +1,11 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/roma.csv"
+roma = read.csv(www, header = TRUE)
+attach(roma)
+
+shapiro.test(AgePatient[Histology == "benign"])
+shapiro.test(AgePatient[Histology == "malignant"])
+
+library(car)
+leveneTest(AgePatient ~ Histology)
+
+t.test(AgePatient ~ Histology, var.equal = TRUE)
