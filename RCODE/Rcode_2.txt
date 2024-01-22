@@ -1,0 +1,12 @@
+
+##############################
+###  example of R in JASP code
+##############################
+
+memory = numeric(1000); for(i in 1:1000){memory[i] = mean(sample(data$HDLchol, 49))}
+
+mean(memory)
+
+sd(memory)
+
+sd(data$HDLchol)/7
