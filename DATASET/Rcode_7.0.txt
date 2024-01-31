@@ -1,0 +1,110 @@
+#######################################################
+###
+### go to
+###
+### https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/fresher.csv
+###
+### and download on your desktop the fresher.csv dataset
+###
+#######################################################
+
+
+fresher = read.csv(file.choose(), header = TRUE)
+attach(fresher)
+tail(fresher)
+
+
+model1 = lm(weight ~ height)
+summary(model1)
+
+model2 = lm(weight ~ gender)
+summary(model2)
+
+
+model3 = lm(weight ~ height + gender)
+model3
+summary(model3)
+
+model4 = lm(weight ~ height * gender)
+model4
+summary(model4)
+
+
+
+par(mfrow = c(1,2))
+## model0
+plot(height, weight, main = "model0")
+points(height[gender == "f"], weight[gender == "f"], bg = "gray", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "gray", pch = 21)
+abline(a = mean(weight), b = 0, col = "black")
+## model1
+plot(height, weight, main = "model1")
+points(height[gender == "f"], weight[gender == "f"], bg = "gray", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "gray", pch = 21)
+abline(a = -83.89, b = 0.85, col = "black")
+
+
+
+
+par(mfrow = c(2,2))
+## model1
+plot(height, weight, main = "model1")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -83.89, b = 0.85, col = "black")
+## model2
+plot(height, weight, main = "model2")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = 56.63, b = 0, col = "magenta")
+abline(a = (56.63 + 13.59), b = 0, col = "blue")
+## model3
+plot(height, weight, main = "model3")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -35.37, b = 0.55, col = "magenta")
+abline(a = (-35.37 + 7.20), b = 0.55, col = "blue")
+## mode4
+plot(height, weight, main = "model4")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -18.50, b = 0.45, col = "magenta")
+abline(a = (-18.50 - 25.96), b = (0.45 + 0.19), col = "blue")
+par(mfrow = c(1,1))
+
+
+
+
+
+par(mfrow = c(2,2))
+## model1
+plot(height, weight, main = "model1, regr. line")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -83.89, b = 0.85, col = "black")
+## model2
+plot(height, weight, main = "model2, t test")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = 56.63, b = 0, col = "magenta")
+abline(a = (56.63 + 13.59), b = 0, col = "blue")
+## model3
+plot(height, weight, main = "model3, Ancova without inter.")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -35.37, b = 0.55, col = "magenta")
+abline(a = (-35.37 + 7.20), b = 0.55, col = "blue")
+## model3
+plot(height, weight, main = "model4, Ancova with inter.")
+points(height[gender == "f"], weight[gender == "f"], bg = "magenta", pch = 21)
+points(height[gender == "m"], weight[gender == "m"], bg = "blue", pch = 21)
+abline(a = -18.50, b = 0.45, col = "magenta")
+abline(a = (-18.50 - 25.96), b = (0.45 + 0.19), col = "blue")
+
+
+
+
+AIC(model4, model3, model2, model1)
+
+
+
