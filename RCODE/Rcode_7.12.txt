@@ -1,0 +1,22 @@
+www = "https://raw.githubusercontent.com/MassimoBorelli/ictpmmp/main/DATASET/jcem.csv"
+jcem = read.csv(www, header = TRUE)
+
+###   jcem = read.csv(file.choose(), header = TRUE)
+
+attach(jcem)
+
+plot(input, response, xlim = c(0,40), ylim = c(10, 48))
+points(input[group=="black"], response[group=="black"], 
+			bg = "black", pch = 21)
+points(input[group=="white"], response[group=="white"], 
+			bg = "bisque", pch = 21)
+wrong = lm(response ~ input)
+abline(wrong)
+
+lm1 = lm(response ~ 1)
+lm2 = lm(response ~ input)
+lm3 = lm(response ~ group)
+lm4 = lm(response ~ input + group)
+lm5 = lm(response ~ input * group)
+AIC(lm1, lm2, lm3, lm4, lm5)
+plot(1:5, AIC(lm1, lm2, lm3, lm4, lm5)[,2], "b", main = "AIC")
